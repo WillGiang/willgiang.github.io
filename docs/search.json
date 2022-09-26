@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m an imaging scientist who works with advanced light microscopes. This blog will cover sample preparation, acquisition, and image analysis/processing–especially in the context of labs and core facilities."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "code\n\n\nanalysis\n\n\nlasers\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html",
+    "href": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html",
+    "title": "Insights into Spectra-Physics’ InSight DeepSee",
+    "section": "",
+    "text": "We thought the Nikon A1R MP’s laser system, the Spectra-Physics InSight DeepSee, was in need of repair. After contacting the service engineer for Spectra-Physics, we learned two laser diodes were already replaced with a bill of $30k. We were also warned that the laser power had been reduced, but otherwise the DeepSee should be functional.\n\nThe liquid in the chiller unit has been flushed and replaced with coolant.\nAfter turning on the microscope and laser systems, it took several days for the laser’s humidity to reach acceptable levels\nThe power output has been reduced\n\n\n\n\nImage of A1plus MP GUI\n\n\n\n\nCode\nimport pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt"
+  },
+  {
+    "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-long-does-the-insight-deepsee-need-to-effectively-warm-up",
+    "href": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-long-does-the-insight-deepsee-need-to-effectively-warm-up",
+    "title": "Insights into Spectra-Physics’ InSight DeepSee",
+    "section": "2 How long does the InSight DeepSee need to effectively warm up?",
+    "text": "2 How long does the InSight DeepSee need to effectively warm up?\nSept 20: Turned on all scope components and noticed humidity was too high, so I started logging it\n\n\nCode\nhumidity_csv = \"Time_since_DeepSee_turn_on.csv\"\nhumidity_df = pd.read_csv(humidity_csv)\n\nhumidity_plot = sns.scatterplot(data = humidity_df,\n                                x = \"Time [Minutes]\",\n                                y = \"Relative Humidity [%]\",\n                               )\n\nhumidity_plot.set_title(\"Four days for humidity to stabilize from start-up\")\nhumidity_plot.set_xlim(0, 4500)\n\n\n(0.0, 4500.0)"
+  },
+  {
+    "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-much-power-did-we-lose-as-a-function-of-wavelength",
+    "href": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-much-power-did-we-lose-as-a-function-of-wavelength",
+    "title": "Insights into Spectra-Physics’ InSight DeepSee",
+    "section": "3 How much power did we lose as a function of wavelength?",
+    "text": "3 How much power did we lose as a function of wavelength?\n\nDigitized the theoretical tuning power from the manual\nThere also appears to be a warmup time after turning emission ON\nSevere drop in power when laser is tuned above 1000nm\n\n\n\nCode\ndata_csv = \"2022-09-23_laser-power-vs-wavelength_with-theoretical.csv\"\ndf = pd.read_csv(data_csv)\n\npalette = sns.color_palette(\"mako_r\", 5)\nsns.set_theme(style=\"whitegrid\")\n\ng = sns.scatterplot(data = df,\n                    x = \"Wavelength [nm]\",\n                    y = \"Power [mW]\",\n                    hue = \"Replicate\",\n                    style = \"Replicate\",\n                    palette = palette,\n                   )\n\ng.set_title(\"InSight DeepSee far from spec \\nat $\\lambda$ > 1000nm\")\ng.set_xlim(700, 1100)\ng.set_ylim(-20, 1400)\n\n\n(-20.0, 1400.0)"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "Surely Quarto will be what I finally settle on for a personal blog."
+  }
+]

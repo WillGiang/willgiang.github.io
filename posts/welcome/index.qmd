@@ -1,0 +1,11 @@
+---
+title: "Welcome To My Blog"
+author: "William Giang"
+date: "2022-09-25"
+categories: [news]
+---
+
+I set up a website through GitHub Pages with Jekyll a while ago, but I ended up wanting to use the domain as a proof of concept for [filtering microscopes based on specs](https://github.com/WillGiang/microscope-filter-fun). 
+While I like [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) and have successfully used it for hosting [scope documentation for a lab spinning disk confocal microscope](https://willgiang.github.io/scope-docs-site/), I'm not yet at a point where I'd want to toss $15 / month to become an "Insider" to receive certain features.
+
+Surely [Quarto](https://quarto.org/) will be what I finally settle on for a personal blog.

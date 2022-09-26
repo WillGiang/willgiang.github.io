@@ -1,0 +1,19 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/MixIndentations
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/williamgiang/
+    - icon: github
+      text: Github
+      href: https://github.com/WillGiang/
+
+---
+
+I'm an imaging scientist who works with advanced light microscopes. This blog will cover sample preparation, acquisition, and image analysis/processing--especially in the context of labs and core facilities.
