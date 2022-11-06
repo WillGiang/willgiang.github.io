@@ -1,0 +1,146 @@
+---
+title: Visualization Options in Fiji
+author: William Giang
+date: "2022-11-06"
+categories: [visualization, Fiji, ImageJ]
+toc: true
+number-sections: false
+highlight-style: pygments
+format:
+  html:
+    code-fold: false
+    code-tools: true
+    html-math-method: katex
+  pdf:
+    geometry:
+      - top=30mm
+      - left=20mm
+  docx: default
+---
+
+# Selected Visualization Options in Fiji 
+
+Example dataset: single-channel z-stack with fluorescently tagged keratin-14
+
+We'll cover:
+
+- A common "solution" for seeing fainter structures 
+- A better solution using gamma for seeing fainter structures
+- Color-coding by orientation 
+- Color-coding by radiality 
+- Color-coding by depth
+
+Note: This is by no means a complete list of visualization solutions 
+(see [the official Visualization docs](https://imagej.net/imaging/visualization) for more) 
+but rather a carefully curated subset for my labmates. 
+
+
+## Max intensity projection (typical)
+First, we'll load a max intensity projection with brightness & contrast settings chosen
+such that they are pretty much at the min and max values of the image
+
+```java
+open("C:/Users/will/Documents/2022-11-06_keratin-visualization/MAX_00-keratin-crop_MIP_130_14000.tif");
+orig_name = getTitle();
+setMinAndMax(130, 14000);
+
+```
+<a href="image_1667776420623.png"><img src="image_1667776420623.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000.tif"/></a>
+
+This 16-bit image has a fair amount of dynamic range, so it's tough to 
+make out the fainter keratin filaments.
+
+One common "solution" is by reducing the maximum value within the Brightness and Contrast window,
+but then the brighter structures appear blown out.
+
+```java
+run("Duplicate...", " ");
+setMinAndMax(130, 3100);
+
+
+```
+<a href="image_1667776421117.png"><img src="image_1667776421117.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-1.tif"/></a>
+
+## Adjusting gamma via a look-up table (LUT)
+
+A better solution is to use gamma for adjusting the LUT.
+See [here](https://twitter.com/loicaroyer/status/1284331962086248448) 
+for a nice tweetorial on gamma by [@loicaroyer](https://twitter.com/loicaroyer)
+
+Let's make use of LUTs that incorporate different gamma values.
+
+(Thanks to `JDM_LUTs` and `NeuroCyto_LUTs`)
+
+From left to right: gamma = 0.25, 0.50, 0.75
+
+```java
+setMinAndMax(130, 14000);
+
+for (i = 25; i < 100;i=i+25){
+	run("Duplicate...", " ");
+	run("JDM Grays g=0." + i + " ");
+}
+
+```
+<a href="image_1667776421759.png"><img src="image_1667776421759.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-1.tif"/></a>
+<a href="image_1667776422175.png"><img src="image_1667776422175.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-2.tif"/></a>
+<a href="image_1667776422587.png"><img src="image_1667776422587.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-3.tif"/></a>
+<a href="image_1667776423017.png"><img src="image_1667776423017.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-4.tif"/></a>
+
+## Adjusting gamma using Visualization Toolset
+
+However, what if you want a gamma of 0.6?
+
+Using the [Visualization Toolset](https://github.com/kwolbachia/Visualization_toolset)
+from [@kWolbachia](https://twitter.com/kwolbachia), you can freely adjust the gamma on the LUT itself. 
+
+By holding the ctrl key and then dragging the mouse side to side,
+you can easily and quickly find the optimal gamma setting.
+
+
+
+## Color coding by orientation
+
+Using [OrientationJ](http://bigwww.epfl.ch/demo/orientationj/#analysis), 
+images can be colored by local orientation and coherency.
+
+Left: Original greyscale
+
+Right: Colored in HSB mode where hue is orientation, saturation is coherency, and brightness comes from original image
+
+```java
+selectWindow(orig_name);
+run("Duplicate...", " ");
+run("OrientationJ Analysis", "tensor=2.0 gradient=0 color-survey=on hsb=on hue=Orientation sat=Coherency bri=Original-Image radian=off ");
+setMinAndMax(0, 100);
+
+```
+<a href="image_1667776423800.png"><img src="image_1667776423800.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-5.tif"/></a>
+<a href="image_1667776424230.png"><img src="image_1667776424230.png" width="250" alt="OJ-Color-survey-1"/></a>
+
+## Color coding by radiality/non-radiality
+
+Building on OrientationJ, [@katpyxa](https://twitter.com/katpyxa) created [a macro for splitting an image into 
+radial and non-radial components](https://github.com/ekatrukha/radialitymap).
+
+<a href="merged-orientation.png"><img src="merged-orientation.png" width="250" alt="merged-orientation.png"/></a>
+
+## Color coding by depth
+
+ImageJ/Fiji has a "Temporal-Color Code" feature which works fine if eventually you want a Z-projection.
+
+[@katpyxa](https://twitter.com/katpyxa) has a nice [plugin](https://github.com/ekatrukha/ZstackDepthColorCode) 
+for doing depth color coding without Z-projections and with bonus options.
+
+Image: Example of Temporal-Color Code with the Fire LUT and increased contrast
+
+```java
+open("C:/Users/will/Documents/2022-11-06_keratin-visualization/00-keratin-crop.tif");
+run("Temporal-Color Code", "lut=Fire start=1 end=18");
+setMinAndMax(0, 100);
+```
+
+<a href="image_1667776426427.png"><img src="image_1667776426427.png" width="250" alt="MAX_colored"/></a>
+
+```
+```
