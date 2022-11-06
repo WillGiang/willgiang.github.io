@@ -224,6 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="selected-visualization-options-in-fiji" class="level1">
 <h1>Selected Visualization Options in Fiji</h1>
+<p>A curated subset of visualization options within Fiji for labmates.</p>
 <p>Example dataset: single-channel z-stack with fluorescently tagged keratin-14</p>
 <p>We’ll cover:</p>
 <ul>
@@ -233,7 +234,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Color-coding by radiality</li>
 <li>Color-coding by depth</li>
 </ul>
-<p>Note: This is by no means a complete list of visualization solutions (see <a href="https://imagej.net/imaging/visualization">the official Visualization docs</a> for more) but rather a carefully curated subset for my labmates.</p>
 <section id="max-intensity-projection-typical" class="level2">
 <h2 class="anchored" data-anchor-id="max-intensity-projection-typical">Max intensity projection (typical)</h2>
 <p>First, we’ll load a max intensity projection with brightness &amp; contrast settings chosen such that they are pretty much at the min and max values of the image</p>
@@ -250,9 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="adjusting-gamma-via-a-look-up-table-lut" class="level2">
 <h2 class="anchored" data-anchor-id="adjusting-gamma-via-a-look-up-table-lut">Adjusting gamma via a look-up table (LUT)</h2>
-<p>A better solution is to use gamma for adjusting the LUT. See <a href="https://twitter.com/loicaroyer/status/1284331962086248448">here</a> for a nice tweetorial on gamma by <a href="https://twitter.com/loicaroyer"><span class="citation" data-cites="loicaroyer">@loicaroyer</span></a></p>
-<p>Let’s make use of LUTs that incorporate different gamma values.</p>
-<p>(Thanks to <code>JDM_LUTs</code> and <code>NeuroCyto_LUTs</code>)</p>
+<p>A better solution is to use gamma<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for adjusting the LUT.</p>
+<p>Let’s make use of LUTs<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> that incorporate different gamma values.</p>
 <p>From left to right: gamma = 0.25, 0.50, 0.75</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">14000</span><span class="op">);</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -260,7 +259,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span><span class="op">(</span><span class="st">"JDM Grays g=0."</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">" "</span><span class="op">);</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a href="image_1667776421759.png"><img src="image_1667776421759.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-1.tif"></a> <a href="image_1667776422175.png"><img src="image_1667776422175.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-2.tif"></a> <a href="image_1667776422587.png"><img src="image_1667776422587.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-3.tif"></a> <a href="image_1667776423017.png"><img src="image_1667776423017.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-4.tif"></a></p>
+<p><a href="gamma_0p25.png"><img src="gamma_0p25.png" width="250" alt="gamma=0.25"></a> <a href="gamma_0p50.png"><img src="gamma_0p50.png" width="250" alt="gamma=0.50"></a> <a href="gamma_0p75.png"><img src="gamma_0p75.png" width="250" alt="gamma=0.75"></a></p>
 </section>
 <section id="adjusting-gamma-using-visualization-toolset" class="level2">
 <h2 class="anchored" data-anchor-id="adjusting-gamma-using-visualization-toolset">Adjusting gamma using Visualization Toolset</h2>
@@ -282,12 +281,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="color-coding-by-radialitynon-radiality" class="level2">
 <h2 class="anchored" data-anchor-id="color-coding-by-radialitynon-radiality">Color coding by radiality/non-radiality</h2>
 <p>Building on OrientationJ, <a href="https://twitter.com/katpyxa"><span class="citation" data-cites="katpyxa">@katpyxa</span></a> created <a href="https://github.com/ekatrukha/radialitymap">a macro for splitting an image into radial and non-radial components</a>.</p>
-<p><a href="merged-orientation.png"><img src="merged-orientation.png" width="250" alt="merged-orientation.png"></a></p>
+<p>Left: Original greyscale</p>
+<p>Right: Radial (magenta) and non-radial (cyan) components</p>
+<p><a href="image_1667776423800.png"><img src="image_1667776423800.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-5.tif"></a> <a href="merged-orientation.png"><img src="merged-orientation.png" width="250" alt="merged-orientation.png"></a></p>
 </section>
 <section id="color-coding-by-depth" class="level2">
 <h2 class="anchored" data-anchor-id="color-coding-by-depth">Color coding by depth</h2>
 <p>ImageJ/Fiji has a “Temporal-Color Code” feature which works fine if eventually you want a Z-projection.</p>
 <p><a href="https://twitter.com/katpyxa"><span class="citation" data-cites="katpyxa">@katpyxa</span></a> has a nice <a href="https://github.com/ekatrukha/ZstackDepthColorCode">plugin</a> for doing depth color coding without Z-projections and with bonus options.</p>
+<p>Astute readers will notice that this coverslip was slightly tilted!</p>
 <p>Image: Example of Temporal-Color Code with the Fire LUT and increased contrast</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span><span class="op">(</span><span class="st">"C:/Users/will/Documents/2022-11-06_keratin-visualization/00-keratin-crop.tif"</span><span class="op">);</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Temporal-Color Code"</span><span class="op">,</span> <span class="st">"lut=Fire start=1 end=18"</span><span class="op">);</span></span>
@@ -301,7 +303,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See <a href="https://twitter.com/loicaroyer/status/1284331962086248448">here</a> for a nice tweetorial on gamma by <a href="https://twitter.com/loicaroyer"><span class="citation" data-cites="loicaroyer">@loicaroyer</span></a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Thanks to <a href="https://sites.imagej.net/Jdm/luts/">JDM_LUTs</a> and <a href="https://forum.image.sc/t/neurocyto-luts-update-site/26244">NeuroCyto_LUTs</a>!<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -472,131 +481,135 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Selected Visualization Options in Fiji </span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>Example dataset: single-channel z-stack with fluorescently tagged keratin-14</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>We'll cover:</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A common "solution" for seeing fainter structures </span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A better solution using gamma for seeing fainter structures</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Color-coding by orientation </span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Color-coding by radiality </span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Color-coding by depth</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>Note: This is by no means a complete list of visualization solutions </span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>(see <span class="co">[</span><span class="ot">the official Visualization docs</span><span class="co">](https://imagej.net/imaging/visualization)</span> for more) </span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>but rather a carefully curated subset for my labmates. </span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Max intensity projection (typical)</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>First, we'll load a max intensity projection with brightness &amp; contrast settings chosen</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>such that they are pretty much at the min and max values of the image</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="in">```java</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span><span class="op">(</span><span class="st">"C:/Users/will/Documents/2022-11-06_keratin-visualization/MAX_00-keratin-crop_MIP_130_14000.tif"</span><span class="op">);</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>orig_name <span class="op">=</span> <span class="fu">getTitle</span><span class="op">();</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">14000</span><span class="op">);</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>A curated subset of visualization options within Fiji for labmates.</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>Example dataset: single-channel z-stack with fluorescently tagged keratin-14</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>We'll cover:</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A common "solution" for seeing fainter structures </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A better solution using gamma for seeing fainter structures</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Color-coding by orientation </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Color-coding by radiality </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Color-coding by depth</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Max intensity projection (typical)</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>First, we'll load a max intensity projection with brightness &amp; contrast settings chosen</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>such that they are pretty much at the min and max values of the image</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="in">```java</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span><span class="op">(</span><span class="st">"C:/Users/will/Documents/2022-11-06_keratin-visualization/MAX_00-keratin-crop_MIP_130_14000.tif"</span><span class="op">);</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>orig_name <span class="op">=</span> <span class="fu">getTitle</span><span class="op">();</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">14000</span><span class="op">);</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776420623.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776420623.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776420623.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776420623.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>This <span class="dv">16</span><span class="op">-</span>bit image has a fair amount of dynamic range<span class="op">,</span> so it<span class="er">'</span>s tough to </span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>make out the fainter keratin filaments<span class="op">.</span></span>
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>This <span class="dv">16</span><span class="op">-</span>bit image has a fair amount of dynamic range<span class="op">,</span> so it<span class="er">'</span>s tough to </span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>make out the fainter keratin filaments<span class="op">.</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu">One</span> common <span class="st">"solution"</span> is by reducing the maximum value within the Brightness and Contrast window<span class="op">,</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>but then the brighter structures appear blown out<span class="op">.</span></span>
 <span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="fu">One</span> common <span class="st">"solution"</span> is by reducing the maximum value within the Brightness and Contrast window<span class="op">,</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>but then the brighter structures appear blown out<span class="op">.</span></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>```java</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">3100</span><span class="op">);</span></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>```java</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">3100</span><span class="op">);</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776421117.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776421117.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-1.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
 <span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776421117.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776421117.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-1.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>## Adjusting gamma via a look<span class="op">-</span>up <span class="fu">table</span> <span class="op">(</span>LUT<span class="op">)</span></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>A better solution is to use gamma <span class="cf">for</span> adjusting the LUT<span class="op">.</span></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="fu">See</span> <span class="op">[</span>here<span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/loicaroyer/status/1284331962086248448) </span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a nice tweetorial on gamma by <span class="op">[</span><span class="at">@loicaroyer</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/loicaroyer)</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>## Adjusting gamma via a look<span class="op">-</span>up <span class="fu">table</span> <span class="op">(</span>LUT<span class="op">)</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>A better solution is to use gamma<span class="op">[^</span><span class="dv">1</span><span class="op">]</span> <span class="cf">for</span> adjusting the LUT<span class="op">.</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="op">[^</span><span class="dv">1</span><span class="op">]:</span> See <span class="op">[</span>here<span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/loicaroyer/status/1284331962086248448) </span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a nice tweetorial on gamma by <span class="op">[</span><span class="at">@loicaroyer</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/loicaroyer)</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>Let<span class="er">'</span>s make use of LUTs<span class="op">[^</span><span class="dv">2</span><span class="op">]</span> that incorporate different gamma values<span class="op">.</span></span>
 <span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>Let<span class="er">'</span>s make use of LUTs that incorporate different gamma values<span class="op">.</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="op">[^</span><span class="dv">2</span><span class="op">]:</span> Thanks to <span class="op">[</span>JDM_LUTs<span class="op">](</span>https<span class="op">:</span><span class="co">//sites.imagej.net/Jdm/luts/) and [NeuroCyto_LUTs](https://forum.image.sc/t/neurocyto-luts-update-site/26244)!</span></span>
 <span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="op">(</span>Thanks to `JDM_LUTs` and `NeuroCyto_LUTs`<span class="op">)</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>From left to right<span class="op">:</span> gamma <span class="op">=</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.50</span><span class="op">,</span> <span class="fl">0.75</span></span>
 <span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>From left to right<span class="op">:</span> gamma <span class="op">=</span> <span class="fl">0.25</span><span class="op">,</span> <span class="fl">0.50</span><span class="op">,</span> <span class="fl">0.75</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>```java</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">14000</span><span class="op">);</span></span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">25</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span>i<span class="op">=</span>i<span class="op">+</span><span class="dv">25</span><span class="op">){</span></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span><span class="op">(</span><span class="st">"JDM Grays g=0."</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">" "</span><span class="op">);</span></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776421759.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776421759.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-1.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776422175.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776422175.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-2.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776422587.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776422587.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-3.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776423017.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776423017.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-4.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>## Adjusting gamma using Visualization Toolset</span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>However<span class="op">,</span> what <span class="cf">if</span> you want a gamma of <span class="fl">0.6</span><span class="op">?</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>```java</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">130</span><span class="op">,</span> <span class="dv">14000</span><span class="op">);</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">25</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span>i<span class="op">=</span>i<span class="op">+</span><span class="dv">25</span><span class="op">){</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span><span class="op">(</span><span class="st">"JDM Grays g=0."</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">" "</span><span class="op">);</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"gamma_0p25.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"gamma_0p25.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"gamma=0.25"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"gamma_0p50.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"gamma_0p50.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"gamma=0.50"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"gamma_0p75.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"gamma_0p75.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"gamma=0.75"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>## Adjusting gamma using Visualization Toolset</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>However<span class="op">,</span> what <span class="cf">if</span> you want a gamma of <span class="fl">0.6</span><span class="op">?</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>Using the <span class="op">[</span>Visualization Toolset<span class="op">](</span>https<span class="op">:</span><span class="co">//github.com/kwolbachia/Visualization_toolset)</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>from <span class="op">[</span><span class="at">@kWolbachia</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/kwolbachia), you can freely adjust the gamma on the LUT itself. </span></span>
 <span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>Using the <span class="op">[</span>Visualization Toolset<span class="op">](</span>https<span class="op">:</span><span class="co">//github.com/kwolbachia/Visualization_toolset)</span></span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>from <span class="op">[</span><span class="at">@kWolbachia</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/kwolbachia), you can freely adjust the gamma on the LUT itself. </span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>By holding the ctrl key and then dragging the mouse side to side<span class="op">,</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>you can easily and quickly find the optimal gamma setting<span class="op">.</span></span>
 <span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>By holding the ctrl key and then dragging the mouse side to side<span class="op">,</span></span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>you can easily and quickly find the optimal gamma setting<span class="op">.</span></span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>## <span class="bu">Color</span> coding by orientation</span>
 <span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>## <span class="bu">Color</span> coding by orientation</span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>Using <span class="op">[</span>OrientationJ<span class="op">](</span>http<span class="op">:</span><span class="co">//bigwww.epfl.ch/demo/orientationj/#analysis), </span></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>images can be colored by local orientation and coherency<span class="op">.</span></span>
 <span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>Using <span class="op">[</span>OrientationJ<span class="op">](</span>http<span class="op">:</span><span class="co">//bigwww.epfl.ch/demo/orientationj/#analysis), </span></span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>images can be colored by local orientation and coherency<span class="op">.</span></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="fu">Left</span><span class="op">:</span> Original greyscale</span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>Right<span class="op">:</span> Colored in HSB mode where hue is orientation<span class="op">,</span> saturation is coherency<span class="op">,</span> and brightness comes from original image</span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>```java</span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a><span class="fu">selectWindow</span><span class="op">(</span>orig_name<span class="op">);</span></span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"OrientationJ Analysis"</span><span class="op">,</span> <span class="st">"tensor=2.0 gradient=0 color-survey=on hsb=on hue=Orientation sat=Coherency bri=Original-Image radian=off "</span><span class="op">);</span></span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">100</span><span class="op">);</span></span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776423800.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776423800.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-5.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776424230.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776424230.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"OJ-Color-survey-1"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>## <span class="bu">Color</span> coding by radiality<span class="op">/</span>non<span class="op">-</span>radiality</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="fu">Left</span><span class="op">:</span> Original greyscale</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>Right<span class="op">:</span> Colored in HSB mode where hue is orientation<span class="op">,</span> saturation is coherency<span class="op">,</span> and brightness comes from original image</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>```java</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="fu">selectWindow</span><span class="op">(</span>orig_name<span class="op">);</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Duplicate..."</span><span class="op">,</span> <span class="st">" "</span><span class="op">);</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"OrientationJ Analysis"</span><span class="op">,</span> <span class="st">"tensor=2.0 gradient=0 color-survey=on hsb=on hue=Orientation sat=Coherency bri=Original-Image radian=off "</span><span class="op">);</span></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">100</span><span class="op">);</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776423800.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776423800.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-5.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776424230.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776424230.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"OJ-Color-survey-1"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>## <span class="bu">Color</span> coding by radiality<span class="op">/</span>non<span class="op">-</span>radiality</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>Building on OrientationJ<span class="op">,</span> <span class="op">[</span><span class="at">@katpyxa</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/katpyxa) created [a macro for splitting an image into </span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>radial and non<span class="op">-</span>radial components<span class="op">](</span>https<span class="op">:</span><span class="co">//github.com/ekatrukha/radialitymap).</span></span>
 <span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>Building on OrientationJ<span class="op">,</span> <span class="op">[</span><span class="at">@katpyxa</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/katpyxa) created [a macro for splitting an image into </span></span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>radial and non<span class="op">-</span>radial components<span class="op">](</span>https<span class="op">:</span><span class="co">//github.com/ekatrukha/radialitymap).</span></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"merged-orientation.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"merged-orientation.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"merged-orientation.png"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>## <span class="bu">Color</span> coding by depth</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>Left<span class="op">:</span> Original greyscale</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>Right<span class="op">:</span> <span class="fu">Radial</span> <span class="op">(</span>magenta<span class="op">)</span> and non<span class="op">-</span><span class="fu">radial</span> <span class="op">(</span>cyan<span class="op">)</span> components</span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776423800.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776423800.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_00-keratin-crop_MIP_130_14000-5.tif"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"merged-orientation.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"merged-orientation.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"merged-orientation.png"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
 <span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>ImageJ<span class="op">/</span>Fiji has a <span class="st">"Temporal-Color Code"</span> feature which works fine <span class="cf">if</span> eventually you want a Z<span class="op">-</span>projection<span class="op">.</span></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>## <span class="bu">Color</span> coding by depth</span>
 <span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="at">@katpyxa</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/katpyxa) has a nice [plugin](https://github.com/ekatrukha/ZstackDepthColorCode) </span></span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> doing depth color coding without Z<span class="op">-</span>projections and with bonus options<span class="op">.</span></span>
-<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a><span class="fu">Image</span><span class="op">:</span> Example of Temporal<span class="op">-</span><span class="bu">Color</span> Code with the Fire LUT and increased contrast</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>ImageJ<span class="op">/</span>Fiji has a <span class="st">"Temporal-Color Code"</span> feature which works fine <span class="cf">if</span> eventually you want a Z<span class="op">-</span>projection<span class="op">.</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="at">@katpyxa</span><span class="op">](</span>https<span class="op">:</span><span class="co">//twitter.com/katpyxa) has a nice [plugin](https://github.com/ekatrukha/ZstackDepthColorCode) </span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> doing depth color coding without Z<span class="op">-</span>projections and with bonus options<span class="op">.</span></span>
 <span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>```java</span>
-<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span><span class="op">(</span><span class="st">"C:/Users/will/Documents/2022-11-06_keratin-visualization/00-keratin-crop.tif"</span><span class="op">);</span></span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Temporal-Color Code"</span><span class="op">,</span> <span class="st">"lut=Fire start=1 end=18"</span><span class="op">);</span></span>
-<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">100</span><span class="op">);</span></span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776426427.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776426427.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_colored"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a><span class="fu">Astute</span> readers will notice that <span class="kw">this</span> coverslip was slightly tilted<span class="op">!</span></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="bu">Image</span><span class="op">:</span> Example of Temporal<span class="op">-</span><span class="bu">Color</span> Code with the Fire LUT and increased contrast</span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>```java</span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span><span class="op">(</span><span class="st">"C:/Users/will/Documents/2022-11-06_keratin-visualization/00-keratin-crop.tif"</span><span class="op">);</span></span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="fu">run</span><span class="op">(</span><span class="st">"Temporal-Color Code"</span><span class="op">,</span> <span class="st">"lut=Fire start=1 end=18"</span><span class="op">);</span></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="fu">setMinAndMax</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">100</span><span class="op">);</span></span>
 <span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>a href<span class="op">=</span><span class="st">"image_1667776426427.png"</span><span class="op">&gt;&lt;</span>img src<span class="op">=</span><span class="st">"image_1667776426427.png"</span> width<span class="op">=</span><span class="st">"250"</span> alt<span class="op">=</span><span class="st">"MAX_colored"</span><span class="op">/&gt;&lt;/</span>a<span class="op">&gt;</span></span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -19,6 +19,7 @@ format:
 ---
 
 # Selected Visualization Options in Fiji 
+A curated subset of visualization options within Fiji for labmates.
 
 Example dataset: single-channel z-stack with fluorescently tagged keratin-14
 
@@ -29,10 +30,6 @@ We'll cover:
 - Color-coding by orientation 
 - Color-coding by radiality 
 - Color-coding by depth
-
-Note: This is by no means a complete list of visualization solutions 
-(see [the official Visualization docs](https://imagej.net/imaging/visualization) for more) 
-but rather a carefully curated subset for my labmates. 
 
 
 ## Max intensity projection (typical)
@@ -63,13 +60,14 @@ setMinAndMax(130, 3100);
 
 ## Adjusting gamma via a look-up table (LUT)
 
-A better solution is to use gamma for adjusting the LUT.
-See [here](https://twitter.com/loicaroyer/status/1284331962086248448) 
+A better solution is to use gamma[^1] for adjusting the LUT.
+
+[^1]: See [here](https://twitter.com/loicaroyer/status/1284331962086248448) 
 for a nice tweetorial on gamma by [@loicaroyer](https://twitter.com/loicaroyer)
 
-Let's make use of LUTs that incorporate different gamma values.
+Let's make use of LUTs[^2] that incorporate different gamma values.
 
-(Thanks to `JDM_LUTs` and `NeuroCyto_LUTs`)
+[^2]: Thanks to [JDM_LUTs](https://sites.imagej.net/Jdm/luts/) and [NeuroCyto_LUTs](https://forum.image.sc/t/neurocyto-luts-update-site/26244)!
 
 From left to right: gamma = 0.25, 0.50, 0.75
 
@@ -82,10 +80,9 @@ for (i = 25; i < 100;i=i+25){
 }
 
 ```
-<a href="image_1667776421759.png"><img src="image_1667776421759.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-1.tif"/></a>
-<a href="image_1667776422175.png"><img src="image_1667776422175.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-2.tif"/></a>
-<a href="image_1667776422587.png"><img src="image_1667776422587.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-3.tif"/></a>
-<a href="image_1667776423017.png"><img src="image_1667776423017.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-4.tif"/></a>
+<a href="gamma_0p25.png"><img src="gamma_0p25.png" width="250" alt="gamma=0.25"/></a>
+<a href="gamma_0p50.png"><img src="gamma_0p50.png" width="250" alt="gamma=0.50"/></a>
+<a href="gamma_0p75.png"><img src="gamma_0p75.png" width="250" alt="gamma=0.75"/></a>
 
 ## Adjusting gamma using Visualization Toolset
 
@@ -123,6 +120,11 @@ setMinAndMax(0, 100);
 Building on OrientationJ, [@katpyxa](https://twitter.com/katpyxa) created [a macro for splitting an image into 
 radial and non-radial components](https://github.com/ekatrukha/radialitymap).
 
+Left: Original greyscale
+
+Right: Radial (magenta) and non-radial (cyan) components
+
+<a href="image_1667776423800.png"><img src="image_1667776423800.png" width="250" alt="MAX_00-keratin-crop_MIP_130_14000-5.tif"/></a>
 <a href="merged-orientation.png"><img src="merged-orientation.png" width="250" alt="merged-orientation.png"/></a>
 
 ## Color coding by depth
@@ -131,6 +133,8 @@ ImageJ/Fiji has a "Temporal-Color Code" feature which works fine if eventually y
 
 [@katpyxa](https://twitter.com/katpyxa) has a nice [plugin](https://github.com/ekatrukha/ZstackDepthColorCode) 
 for doing depth color coding without Z-projections and with bonus options.
+
+Astute readers will notice that this coverslip was slightly tilted!
 
 Image: Example of Temporal-Color Code with the Fire LUT and increased contrast
 
