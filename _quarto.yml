@@ -11,6 +11,9 @@ website:
         href: https://github.com/WillGiang
       - icon: twitter
         href: https://twitter.com/MixIndentations
+  google-analytics: "UA-110782240"
+  open-graph: true
+  twitter-card: true
 format:
   html:
     theme: darkly
