@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "visualization\n\n\nFiji\n\n\nImageJ\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\ncode\n\n\nanalysis\n\n\nlasers\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\nNo matching items"
+    "text": "visualization\n\n\nFiji\n\n\nImageJ\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nPython\n\n\nanalysis\n\n\nlasers\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html",
@@ -24,15 +24,15 @@
     "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-long-does-the-insight-deepsee-need-to-effectively-warm-up",
     "href": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-long-does-the-insight-deepsee-need-to-effectively-warm-up",
     "title": "Insights into Spectra-Physics’ InSight DeepSee",
-    "section": "2 How long does the InSight DeepSee need to effectively warm up?",
-    "text": "2 How long does the InSight DeepSee need to effectively warm up?\nSept 20: Turned on all scope components and noticed humidity was too high, so I started logging it\n\n\nCode\nhumidity_csv = \"Time_since_DeepSee_turn_on.csv\"\nhumidity_df = pd.read_csv(humidity_csv)\n\nhumidity_plot = sns.scatterplot(data = humidity_df,\n                                x = \"Time [Minutes]\",\n                                y = \"Relative Humidity [%]\",\n                               )\n\nhumidity_plot.set_title(\"Four days for humidity to stabilize from start-up\")\nhumidity_plot.set_xlim(0, 4500)\n\n\n(0.0, 4500.0)"
+    "section": "How long does the InSight DeepSee need to effectively warm up?",
+    "text": "How long does the InSight DeepSee need to effectively warm up?\nSept 20: Turned on all scope components and noticed humidity was too high, so I started logging it\n\n\nCode\nhumidity_csv = \"Time_since_DeepSee_turn_on.csv\"\nhumidity_df = pd.read_csv(humidity_csv)\n\nhumidity_plot = sns.scatterplot(data = humidity_df,\n                                x = \"Time [Minutes]\",\n                                y = \"Relative Humidity [%]\",\n                               )\n\nhumidity_plot.set_title(\"Four days for humidity to stabilize from start-up\")\nhumidity_plot.set_xlim(0, 4500)\n\n\n(0.0, 4500.0)"
   },
   {
     "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-much-power-did-we-lose-as-a-function-of-wavelength",
     "href": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html#how-much-power-did-we-lose-as-a-function-of-wavelength",
     "title": "Insights into Spectra-Physics’ InSight DeepSee",
-    "section": "3 How much power did we lose as a function of wavelength?",
-    "text": "3 How much power did we lose as a function of wavelength?\n\nDigitized the theoretical tuning power from the manual\nThere also appears to be a warmup time after turning emission ON\nSevere drop in power when laser is tuned above 1000nm\n\n\n\nCode\ndata_csv = \"2022-09-23_laser-power-vs-wavelength_with-theoretical.csv\"\ndf = pd.read_csv(data_csv)\n\npalette = sns.color_palette(\"mako_r\", 5)\nsns.set_theme(style=\"whitegrid\")\n\ng = sns.scatterplot(data = df,\n                    x = \"Wavelength [nm]\",\n                    y = \"Power [mW]\",\n                    hue = \"Replicate\",\n                    style = \"Replicate\",\n                    palette = palette,\n                   )\n\ng.set_title(\"InSight DeepSee far from spec \\nat $\\lambda$ > 1000nm\")\ng.set_xlim(700, 1100)\ng.set_ylim(-20, 1400)\n\n\n(-20.0, 1400.0)"
+    "section": "How much power did we lose as a function of wavelength?",
+    "text": "How much power did we lose as a function of wavelength?\n\nDigitized the theoretical tuning power from the manual\nThere also appears to be a warmup time after turning emission ON\nSevere drop in power when laser is tuned above 1000nm\n\n\n\nCode\ndata_csv = \"2022-09-23_laser-power-vs-wavelength_with-theoretical.csv\"\ndf = pd.read_csv(data_csv)\n\npalette = sns.color_palette(\"mako_r\", 5)\nsns.set_theme(style=\"whitegrid\")\n\ng = sns.scatterplot(data = df,\n                    x = \"Wavelength [nm]\",\n                    y = \"Power [mW]\",\n                    hue = \"Replicate\",\n                    style = \"Replicate\",\n                    palette = palette,\n                   )\n\ng.set_title(\"InSight DeepSee far from spec \\nat $\\lambda$ > 1000nm\")\ng.set_xlim(700, 1100)\ng.set_ylim(-20, 1400)\n\n\n(-20.0, 1400.0)"
   },
   {
     "objectID": "posts/2022-11-06_Visualization-in-Fiji/2022-11-06_Visualization-in-Fiji.html",

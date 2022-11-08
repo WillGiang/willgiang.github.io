@@ -2,9 +2,9 @@
 title: Insights into Spectra-Physics' InSight DeepSee
 author: William Giang
 date: "2022-09-25"
-categories: [code, analysis, lasers]
+categories: [Python, analysis, lasers]
 toc: true
-number-sections: true
+number-sections: false
 highlight-style: pygments
 format:
   html:

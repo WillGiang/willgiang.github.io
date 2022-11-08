@@ -14,10 +14,12 @@ website:
   google-analytics: "UA-110782240"
   open-graph: true
   twitter-card: true
+  reader-mode: true
+  page-footer: "Copyright 2022, William Giang"
+
 format:
   html:
-    theme: darkly
+    theme: 
+      dark: darkly
+      light: flatly
     css: styles.css
-
-
-
