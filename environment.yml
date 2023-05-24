@@ -1,0 +1,16 @@
+name: quarto
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - plotly_express
+  - jupyter
+  - matplotlib
+  - jupyterlab
+  - ca-certificates
+  - certifi
+  - openssl
+  - git
+  - seaborn
+  - pandas
+prefix: C:\Users\will\mambaforge\envs\quarto
