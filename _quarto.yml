@@ -11,11 +11,15 @@ website:
         href: https://github.com/WillGiang
       - icon: twitter
         href: https://twitter.com/MixIndentations
+  cookie-consent:
+    type: express
+    style: headline
+    pallete: dark
   google-analytics: "UA-110782240"
   open-graph: true
   twitter-card: true
   reader-mode: true
-  page-footer: "Copyright 2022, William Giang"
+  page-footer: "Copyright 2023, William Giang"
 
 format:
   html:
