@@ -11,6 +11,8 @@ website:
         href: https://github.com/WillGiang
       - icon: twitter
         href: https://twitter.com/MixIndentations
+      - icon: rss
+        href: index.xml
   cookie-consent:
     type: express
     style: headline
