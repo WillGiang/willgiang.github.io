@@ -4,6 +4,8 @@ author: William Giang
 jupyter: python3
 date: "2023-06-04"
 categories: [Python, PSF, spinning-disk-confocal]
+toc: true
+number-sections: false
 format:
   html:
     code-fold: true
@@ -164,7 +166,7 @@ def plotConfocalPSF(params):
     return ConfocalPSF
 ```
 
-#### Optimal imaging with an oil immersion objective at the coverslip
+### Optimal imaging with an oil immersion objective at the coverslip
 
 First, let's consider an optimal PSF where the location is right at the coverslip and the sample is mounted in an RI-matched solution.
 
@@ -202,7 +204,7 @@ PSF_fixed = plotConfocalPSF(X1Params_high_res_index_matched)
 
 Note the symmetrical nature of the axial view when things are optimal.
 
-#### Imaging with an oil immersion objective, depth=2
+### Imaging with an oil immersion objective, depth=2
 Even at a depth of 2 microns away from the coverslip, not much changes if the RI of the sample matches the RI of the immersion oil
 
 ```{python}
@@ -237,7 +239,7 @@ X1Params_high_res_index_matched_2um = {
 PSF_fixed_2um = plotConfocalPSF(X1Params_high_res_index_matched_2um)
 ```
 
-#### Imaging in DMEM with an oil objective at depth = 0
+### Imaging in DMEM with an oil objective at depth = 0
 Then, let's consider a realistic example: live-cell imaging in DMEM
 
 ```{python}
@@ -276,7 +278,7 @@ PSF_livecell = plotConfocalPSF(X1Params_livecell)
 ```
 
 
-#### Imaging in DMEM with an oil objective at depth = 2
+### Imaging in DMEM with an oil objective at depth = 2
 
 Axial resolution will deteriorate as the focus position moves away from the coverslip.
 
