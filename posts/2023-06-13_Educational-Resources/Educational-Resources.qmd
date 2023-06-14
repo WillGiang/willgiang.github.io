@@ -1,0 +1,98 @@
+---
+title: Educational Resources and Tools
+author: William Giang
+date: "2023-06-13"
+categories: [sample-prep, microscopy, analysis, resources]
+toc: true
+number-sections: false
+highlight-style: pygments
+from: markdown+emoji
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    html-math-method: katex
+  pdf:
+    geometry:
+      - top=30mm
+      - left=20mm
+  docx: default
+---
+
+## Resources for beginners
+
+For understanding digital images, image formation, and basic image processing and analysis, my all-time favorite resource has to be Pete Bankhead's [Introduction to Bioimage Analysis](https://bioimagebook.github.io/index.html).
+
+For more details about fluorescence microscopy, [MyScope (Microscopy Austrailia)](https://myscope.training/#/LMlevel_2_1) is a good resource--especially if you go through their simulators for confocal/STED microscopy.
+
+
+
+| Name | Sample Prep | Microscopy | Analysis[^1] |
+| -----|-------------|------------|---------------------|
+| [Introduction to Bioimage Analysis](https://bioimagebook.github.io/index.html) | :x: | :heavy_check_mark: | :heavy_check_mark: | 
+| [MyScope (Microscopy Austrailia)](https://myscope.training/#/LMlevel_2_1) | :x: |  :heavy_check_mark:| :x:|
+| [Microcourses](https://www.youtube.com/c/Microcourses) | :x: | :heavy_check_mark:| :x:| 
+| [MicroscopyU (Nikon)](https://www.microscopyu.com/) | :heavy_check_mark: | :heavy_check_mark: | :x: | 
+| [Designing a rigorous microscopy experiment: Validating methods and avoiding bias](https://rupress.org/jcb/article/218/5/1452/120908/Designing-a-rigorous-microscopy-experiment) | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| [Tutorial: guidance for quantitative confocal](https://www.nature.com/articles/s41596-020-0313-9) | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| [Fiji Training Notes (Cameron Nowell)](https://bridges.monash.edu/articles/educational_resource/Fiji_Training_Manual_v6_5_/21901989) | :x: | :x: | :heavy_check_mark: |
+| [Lecture BioImage Analysis 2020 (Robert Haase)](https://www.youtube.com/playlist?list=PL5ESQNfM5lc7SAMstEu082ivW4BDMvd0U) | :x: | :x: | :heavy_check_mark: | 
+
+: Collection of online beginner resources with content category indicated by the icons :heavy_check_mark: and :x:.
+
+
+## Colocalization
+
+Colocalization is a frequent analysis request, but avoid the common pitfalls!
+
+| Name | Sample Prep | Microscopy | Analysis |
+| -----|-------------|------------|---------------------|
+| [Colocalization Analysis (ImageJ)](https://imagej.net/imaging/colocalization-analysis) | :x: | :x: | :heavy_check_mark: |
+| [A practical guide to evaluating colocalization in biological microscopy](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3074624/) | :x: | :x:| :heavy_check_mark: | 
+| [Image co-localization--co-occurrence versus correlation](https://journals.biologists.com/jcs/article/131/3/jcs211847/77151/Image-co-localization-co-occurrence-versus) | :x: | :heavy_check_mark: | :heavy_check_mark: |
+| [A localization tale](https://docs.google.com/presentation/d/1ptm-dbG9yN_BmTkxl8yOnFY8jbB7fRoOzrHVUY16s1c/edit#slide=id.g94c31bc59f_0_0) | :x: | :x: | :heavy_check_mark: |
+| [Deconstructing co-localisation workflows: A journey into the black boxes](https://www.youtube.com/watch?v=P2JvFe0hB_M) | :x: | :heavy_check_mark: | :heavy_check_mark: | 
+
+: Collection of colocalization resources
+
+
+## Light-sheet
+
+| Name | Sample Prep | Microscopy | Analysis | 
+| -----|-------------|------------|----------|
+| [Tutorial: practical considerations for tissue clearing and imaging](https://www.nature.com/articles/s41596-021-00502-8) | :heavy_check_mark: | :heavy_check_mark: | :x: | 
+| [Practical considerations for quantitative light sheet fluorescence microscopy](https://www.nature.com/articles/s41592-022-01632-x) | :x: | :heavy_check_mark: | :heavy_check_mark: | 
+
+: Collection of light-sheet resources with content category indicated by the icons :heavy_check_mark: and :x:.
+
+
+## Analysis software downloads and resources
+
+While the free viewers from microscope companies can be helpful for inspecting metadata in an easy-to-parse way[^2], knowing how to use Fiji (or ImageJ with Bio-Formats) will be more beneficial for beginners. Most likely, you'll need to use microscopes from different companies and also use Fiji for some processing/analysis.
+
+
+| Name | Brief Description | Resources | 
+| ---- | ----------------- | ---------|
+| [Fiji](https://fiji.sc/) | A "batteries-included" distribution of ImageJ | [link](https://imagej.net/learn/) |
+| [NIS-Elements Viewer](https://www.microscope.healthcare.nikon.com/products/software/nis-elements/viewer) | Nikon's free standalone program for .nd2 files | |
+| [Imaris Viewer](https://imaris.oxinst.com/imaris-viewer) | Free 3D/4D image viewer (limited!) | [Imaris Homeschool](https://imaris.oxinst.com/homeschool) | 
+| [Leica LAS X Office](https://www.leica-microsystems.com/products/microscope-software/p/leica-las-x-ls/downloads/) | Free software for viewing Leica files | |
+| [SVI Huygens](https://svi.nl/HomePage) | Deconvolution, Visualization, Analysis | [Deconvolution video](https://www.youtube.com/watch?v=UODclB0TPSg) | 
+
+
+### Fiji Plugins and Macros
+
+Exporting a .lif file to individual .tifs can be done through Fiji. One macro that does the trick can be found [here](https://github.com/pmascalchi/ImageJ_Export-LIF-as-Individual-Images). See [my video instructions](https://www.youtube.com/playlist?list=PL3BZUVMG21mvojErrOMw0KQvHxoGTitNj).
+
+Setting colors and adjusting brightness & contrast for multi-channel datasets can be done through [BIOP Channel Tools](https://c4science.ch/w/bioimaging_and_optics_platform_biop/image-processing/imagej_tools/ijab-biop_channel_tools/).
+
+
+## Acquisition (scope-specific)
+
+My documentation for a Nikon Ti2-E with a Yokogawa CSU-X1 spinning disk unit and 405nm photostimulation capabilities can be found [online](https://willgiang.github.io/scope-docs-site/).
+
+My video tutorials for the Advanced Light Microscopy Core's Leica SP8 FALCON and Leica SP8 STED 3X are on [YouTube](https://www.youtube.com/playlist?list=PL3BZUVMG21mtACjh-THnm5JTHY_zHb6o8)
+
+
+[^1]: Due to space limitations, "Analysis" refers to both image analysis and processing. 
+[^2]: Another benefit of looking at .nd2 files using NIS-Elements Viewer (as opposed to Bio-Formats) is the faster loading which is especially helpful if inspecting metadata is the sole goal.

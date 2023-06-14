@@ -1,0 +1,10 @@
+{
+  "hash": "79d71562eb4d8895db004175439fcd60",
+  "result": {
+    "markdown": "---\ntitle: Educational Resources (Curated)\nauthor: William Giang\ndate: '2023-06-13'\ncategories:\n  - sample-prep\n  - microscopy\n  - analysis\ntoc: true\nnumber-sections: false\nhighlight-style: pygments\nformat:\n  html:\n    code-fold: true\n    code-tools: true\n    html-math-method: katex\n  pdf:\n    geometry:\n      - top=30mm\n      - left=20mm\n  docx: default\n---\n\n",
+    "supporting": [
+      "Educational-Resources_files\\figure-docx"
+    ],
+    "filters": []
+  }
+}
