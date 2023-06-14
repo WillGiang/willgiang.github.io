@@ -22,7 +22,7 @@ website:
   twitter-card: true
   reader-mode: true
   page-footer: "Copyright 2023, William Giang"
-  site-url: https://willgiang.github.io
+  site-url: "https://willgiang.github.io"
 
 format:
   html:
