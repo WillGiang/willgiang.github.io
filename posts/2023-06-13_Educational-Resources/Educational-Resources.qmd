@@ -2,6 +2,7 @@
 title: Educational Resources and Tools
 author: William Giang
 date: "2023-06-13"
+description: "Useful resources for microscopists and bio-image analysts"
 categories: [sample-prep, microscopy, analysis, resources]
 toc: true
 number-sections: false
