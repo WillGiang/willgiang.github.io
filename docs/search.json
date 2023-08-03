@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "Educational Resources and Tools\n\n\n\n\n\n\n\nsample-prep\n\n\nmicroscopy\n\n\nanalysis\n\n\nresources\n\n\n\n\n\n\n\n\n\n\n\nJun 13, 2023\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nSpinning Disk Confocal PSFs with PSFmodels\n\n\n\n\n\n\n\nPython\n\n\nPSF\n\n\nspinning-disk-confocal\n\n\n\n\n\n\n\n\n\n\n\nJun 4, 2023\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nVisualization Options in Fiji\n\n\n\n\n\n\n\nvisualization\n\n\nFiji\n\n\nImageJ\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nInsights into Spectra-Physics’ InSight DeepSee\n\n\n\n\n\n\n\nPython\n\n\nanalysis\n\n\nlasers\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\nNo matching items"
+    "text": "Image restoration with deep learning\n\n\n\n\n\n\n\nmicroscopy\n\n\nanalysis\n\n\ndeep-learning\n\n\n\n\nImage restoration with deep learning as used in Architecture and dynamics of a desmosome–endoplasmic reticulum complex\n\n\n\n\n\n\nAug 3, 2023\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nEducational Resources and Tools\n\n\n\n\n\n\n\nsample-prep\n\n\nmicroscopy\n\n\nanalysis\n\n\nresources\n\n\n\n\n\n\n\n\n\n\n\nJun 13, 2023\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nSpinning Disk Confocal PSFs with PSFmodels\n\n\n\n\n\n\n\nPython\n\n\nPSF\n\n\nspinning-disk-confocal\n\n\n\n\n\n\n\n\n\n\n\nJun 4, 2023\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nVisualization Options in Fiji\n\n\n\n\n\n\n\nvisualization\n\n\nFiji\n\n\nImageJ\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nInsights into Spectra-Physics’ InSight DeepSee\n\n\n\n\n\n\n\nPython\n\n\nanalysis\n\n\nlasers\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 25, 2022\n\n\nWilliam Giang\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2022-09-25_Insights-into-DeepSee/09-2022_InSight_DeepSee.html",
@@ -180,5 +180,47 @@
     "title": "Welcome To My Blog",
     "section": "",
     "text": "I set up a website through GitHub Pages with Jekyll a while ago, but I ended up wanting to use the domain as a proof of concept for filtering microscopes based on specs. While I like Material for MkDocs and have successfully used it for hosting scope documentation for a lab spinning disk confocal microscope, I’m not yet at a point where I’d want to toss $15 / month to become an “Insider” to receive certain features.\nSurely Quarto will be what I finally settle on for a personal blog."
+  },
+  {
+    "objectID": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html",
+    "href": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html",
+    "title": "Image restoration with deep learning",
+    "section": "",
+    "text": "A successful live-cell fluorescence microscopy experiment needs to balance spatial/temporal -resolution, sample viability, and image quality which collectively form the “pyramid of frustration”.\nIf the camera exposure time is too long, then motion blur becomes a problem. Shortening the exposure time sacrifices image quality–unless the laser power is increased1. But higher laser power leads to increased odds of phototoxicity (compromising the experiment) and photobleaching (limiting the number of useful images while contributing to phototoxicity)."
+  },
+  {
+    "objectID": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#drcan",
+    "href": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#drcan",
+    "title": "Image restoration with deep learning",
+    "section": "3DRCAN",
+    "text": "3DRCAN\n\n\n\nFigure 1: Endoplasmic reticulum tubules before (top-right) and after denoising with 3DRCAN (bottom-left)\n\n\nWhen performing the experiments for the paper, 3DRCAN was among the state-of-the-art image restoration techniques.\nThere were two downsides to 3DRCAN which limited its use in the paper.\n\nRequires paired images (low/high quality) for training\nPotential to hallucinate at very low signal to noise ratios\n\n\nDifficulties with obtaining paired training data\nWe used an epithelial cell line (A431) stably expressing:\n\n\n\nMarker\nTagged fluorescent protein\n\n\n\n\nDesmosome\nDesmoplakin-EGFP\n\n\nER 2\nmApple-VAPB\n\n\n\nFixation3 and mounting4 conditions were carefully optimized to preserve ER integrity and cell morphology.\nmApple-VAPB’s fixation-induced brightness reduction necessitated longer exposure times and/or higher laser power. However, the spinning disk confocal microscope used to be in a room with poor temperature stability which can lead to stage/sample drift. The longer it takes to acquire a z-stack, the higher the risk of misregistration between the matching datasets which would hamper 3DRCAN performance.\nER morphology in A431 cells can be quite varied–especially as a function of mApple-VAPB expression. To ensure robustness of training data (ER morphology, mApple-VAPB expression levels), 37 datasets were used.\nOverall, obtaining training paired data was a bit of a hassle.\n\n\nArtefacts from 3DRCAN\nAlthough 3DRCAN did great with ER tubules, the restoration of ER sheet-like structures (especially in the dense perinuclear region) was a little suspect. Denoising of other fluorescence microscopy data used Noise2Void–which notably does not require paired training data."
+  },
+  {
+    "objectID": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#footnotes",
+    "href": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#footnotes",
+    "title": "Image restoration with deep learning",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\n(and the fluorophore can handle it)↩︎\nDid you know Sec61B has reduced abundance in certain peripheral tubules?↩︎\nER is generally not well-preserved with typical chemical fixation protocols, but I didn’t know how to cryofix yet.↩︎\nWe saw more flattening with ProLong Glass than with ProLong Gold.↩︎"
+  },
+  {
+    "objectID": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#noise2void",
+    "href": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#noise2void",
+    "title": "Image restoration with deep learning",
+    "section": "Noise2Void",
+    "text": "Noise2Void\n\n\n\n\n\n\nMax intensity projection of mApple-VAPB in A431 cells over an hour (raw)\n\n\n\n\n\n\n\nMax intensity projection of mApple-VAPB in A431 cells over an hour (with Noise2Void)"
+  },
+  {
+    "objectID": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#noise2void-n2v",
+    "href": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#noise2void-n2v",
+    "title": "Image restoration with deep learning",
+    "section": "Noise2Void (N2V)",
+    "text": "Noise2Void (N2V)\nOne reason to like Noise2Void is that its training data can consist solely of noisy images.\nNote: Fixed pattern noise (from the sCMOS camera) is still visible after N2V, but it was dramatically reduced with 3DRCAN.\n\n\n\n\n\n\nMax intensity projection of mApple-VAPB in A431 cells over an hour (raw)\n\n\n\n\n\n\n\nMax intensity projection of mApple-VAPB in A431 cells over an hour (with Noise2Void)"
+  },
+  {
+    "objectID": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#n2v2",
+    "href": "posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html#n2v2",
+    "title": "Image restoration with deep learning",
+    "section": "N2V2",
+    "text": "N2V2\nPrevious examples showed the power of image restoration on fluorescence microscopy datasets, but electron microscopy datasets can also be denoised!\n\n\nThe total acquisition time for one of our FIBSEM datasets took 8 days. Scope time is precious, so scanning slower is not an option. Increasing beam energy could lead to sample damage or deeper penetration–when we only want the surface.\nNoise2Void was initially applied to the Focused Ion Beam Scanning Electron Microscopy (FIBSEM) datasets, but checkerboard artefacts hindered automated segmentation of certain objects.\nFortunately during paper revisions, N2V2 became available!\nCompare between raw, Noise2Void, and N2V2 below.\n\nrawN2VN2V2\n\n\n\n\n\nSmall crop of a FIBSEM dataset with 4x4x4 nm voxels.\n\n\n\n\n\n\n\nSmall crop of a FIBSEM dataset with 4x4x4 nm voxels.\n\n\n\n\n\n\n\nSmall crop of a FIBSEM dataset with 4x4x4 nm voxels."
   }
 ]

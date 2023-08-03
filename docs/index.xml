@@ -9,8 +9,156 @@
 <link>https://willgiang.github.io/index.html</link>
 <atom:link href="https://willgiang.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.353</generator>
-<lastBuildDate>Tue, 13 Jun 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.433</generator>
+<lastBuildDate>Thu, 03 Aug 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Image restoration with deep learning</title>
+  <dc:creator>William Giang</dc:creator>
+  <link>https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="pyramid-of-frustration" class="level1">
+<h1>Pyramid of frustration</h1>
+<p>A successful live-cell fluorescence microscopy experiment needs to balance spatial/temporal -resolution, sample viability, and image quality which collectively form the “pyramid of frustration”.</p>
+<p>If the camera exposure time is too long, then motion blur becomes a problem. Shortening the exposure time sacrifices image quality–unless the laser power is increased<sup>1</sup>. But higher laser power leads to increased odds of phototoxicity (compromising the experiment) and photobleaching (limiting the number of useful images while contributing to phototoxicity).</p>
+</section>
+<section id="image-restoration-with-deep-learning" class="level1 page-columns page-full">
+<h1>Image restoration with deep learning</h1>
+<p>Deep learning image resolution techniques can handle images with very poor signal-to-noise ratios. Relaxed image quality constraints allow for faster and/or gentler imaging.</p>
+<section id="drcan" class="level2">
+<h2 class="anchored" data-anchor-id="drcan">3DRCAN</h2>
+<div id="fig-3drcan" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/src/3DRCAN-comparison.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Endoplasmic reticulum tubules before (top-right) and after denoising with 3DRCAN (bottom-left)</figcaption>
+</figure>
+</div>
+<p>When performing the experiments for the <a href="https://www.nature.com/articles/s41556-023-01154-4">paper</a>, <a href="https://www.nature.com/articles/s41592-021-01155-x">3DRCAN</a> was among the state-of-the-art image restoration techniques.</p>
+<p>There were two downsides to 3DRCAN which limited its use in the paper.</p>
+<ol type="1">
+<li>Requires paired images (low/high quality) for training</li>
+<li>Potential to hallucinate at very low signal to noise ratios</li>
+</ol>
+<section id="difficulties-with-obtaining-paired-training-data" class="level3">
+<h3 class="anchored" data-anchor-id="difficulties-with-obtaining-paired-training-data">Difficulties with obtaining paired training data</h3>
+<p>We used an epithelial cell line (A431) stably expressing:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Marker</th>
+<th>Tagged fluorescent protein</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Desmosome</td>
+<td>Desmoplakin-EGFP</td>
+</tr>
+<tr class="even">
+<td>ER <sup>2</sup></td>
+<td>mApple-VAPB</td>
+</tr>
+</tbody>
+</table>
+<p>Fixation<sup>3</sup> and mounting<sup>4</sup> conditions were carefully optimized to preserve ER integrity and cell morphology.</p>
+<p>mApple-VAPB’s fixation-induced brightness reduction necessitated longer exposure times and/or higher laser power. However, the spinning disk confocal microscope used to be in a room with poor temperature stability which can lead to stage/sample drift. The longer it takes to acquire a z-stack, the higher the risk of misregistration between the matching datasets which would hamper 3DRCAN performance.</p>
+<p>ER morphology in A431 cells can be quite varied–especially as a function of mApple-VAPB expression. To ensure robustness of training data (ER morphology, mApple-VAPB expression levels), 37 datasets were used.</p>
+<p>Overall, obtaining training paired data was a bit of a hassle.</p>
+</section>
+<section id="artefacts-from-3drcan" class="level3">
+<h3 class="anchored" data-anchor-id="artefacts-from-3drcan">Artefacts from 3DRCAN</h3>
+<p>Although 3DRCAN did great with ER tubules, the restoration of ER sheet-like structures (especially in the dense perinuclear region) was a little suspect. Denoising of other fluorescence microscopy data used Noise2Void–which notably does not require paired training data.</p>
+</section>
+</section>
+<section id="noise2void-n2v" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="noise2void-n2v">Noise2Void (N2V)</h2>
+<p>One reason to like Noise2Void is that its training data can consist solely of noisy images.</p>
+<p>Note: Fixed pattern noise (from the sCMOS camera) is still visible after N2V, but it was dramatically reduced with 3DRCAN.</p>
+<div class="column-screen quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="Raw-for-N2V" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/src/MIP-raw.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Max intensity projection of mApple-VAPB in A431 cells over an hour (raw)</figcaption>
+</figure>
+</div>
+</div>
+<div id="N2V-for-N2V" class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/src/MIP-N2V.gif" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Max intensity projection of mApple-VAPB in A431 cells over an hour (with Noise2Void)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="n2v2" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="n2v2">N2V2</h2>
+<p>Previous examples showed the power of image restoration on fluorescence microscopy datasets, but electron microscopy datasets can also be denoised!</p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>The total acquisition time for one of our FIBSEM datasets took 8 days. Scope time is precious, so scanning slower is not an option. Increasing beam energy could lead to sample damage or deeper penetration–when we only want the surface.</p>
+</div></div><p>Noise2Void was initially applied to the Focused Ion Beam Scanning Electron Microscopy (FIBSEM) datasets, but checkerboard artefacts hindered automated segmentation of certain objects.</p>
+<p>Fortunately during paper revisions, N2V2 became available!</p>
+<p>Compare between raw, Noise2Void, and N2V2 below.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true">raw</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">N2V</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" aria-controls="tabset-1-3" aria-selected="false">N2V2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/src/01_raw.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Small crop of a FIBSEM dataset with 4x4x4 nm voxels.</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/src/02_N2V.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Small crop of a FIBSEM dataset with 4x4x4 nm voxels.</figcaption>
+</figure>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" aria-labelledby="tabset-1-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/src/03_N2V2.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Small crop of a FIBSEM dataset with 4x4x4 nm voxels.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>(and the fluorophore can handle it)↩︎</p></li>
+<li id="fn2"><p>Did you know <a href="https://www.nature.com/articles/s41467-017-00494-8">Sec61B has reduced abundance in certain peripheral tubules</a>?↩︎</p></li>
+<li id="fn3"><p>ER is generally not well-preserved with typical chemical fixation protocols, but I didn’t know how to cryofix yet.↩︎</p></li>
+<li id="fn4"><p>We saw more flattening with ProLong Glass than with ProLong Gold.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>microscopy</category>
+  <category>analysis</category>
+  <category>deep-learning</category>
+  <guid>https://willgiang.github.io/posts/2023-08-03_techniques-in-NCB-paper/2023-08-03_Image-Restoration.html</guid>
+  <pubDate>Thu, 03 Aug 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Educational Resources and Tools</title>
   <dc:creator>William Giang</dc:creator>
