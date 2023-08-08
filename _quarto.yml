@@ -17,9 +17,11 @@ website:
     type: express
     style: headline
     pallete: dark
+  image: DSM3-2-2_render.png
   google-analytics: "UA-110782240"
   open-graph: true
-  twitter-card: true
+  twitter-card:
+    creator: "@MixIndentations"
   reader-mode: true
   page-footer: "Copyright 2023, William Giang"
   site-url: "https://willgiang.github.io"

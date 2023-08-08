@@ -9,6 +9,11 @@
 <link>https://willgiang.github.io/index.html</link>
 <atom:link href="https://willgiang.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
+<image>
+<url>https://willgiang.github.io/DSM3-2-2_render.png</url>
+<title>In and Out of Scope</title>
+<link>https://willgiang.github.io/index.html</link>
+</image>
 <generator>quarto-1.3.433</generator>
 <lastBuildDate>Thu, 03 Aug 2023 04:00:00 GMT</lastBuildDate>
 <item>
